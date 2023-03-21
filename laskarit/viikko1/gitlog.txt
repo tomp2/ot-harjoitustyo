@@ -1,0 +1,113 @@
+commit d6530fc8ca988af4f3dd196632e8acfe56c60af2
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:48:14 2023 +0200
+
+   poista file1 ja uudelleennimeä file2 -> file22
+
+tiedostoja/file2             | 0
+tiedostoja/{file1 => file22} | 0
+2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 367995c208bb68e7c92a7b9b41e2442a043584f0
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:39:53 2023 +0200
+
+   luo kansio tiedostoja ja luo uuteen kansioon tiedostot file1, file2 ja file3
+
+tiedostoja/file1 | 0
+tiedostoja/file2 | 0
+tiedostoja/file3 | 0
+3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit db71fa7b880241bf4abc5c545ee0d231be170b25
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:35:21 2023 +0200
+
+   muutettiin tiedostoja eka.txt ja kolmas.txt
+
+eka.txt    | 5 ++---
+kolmas.txt | 2 +-
+2 files changed, 3 insertions(+), 4 deletions(-)
+
+commit 8f25801d613e06923738b26d8da84ca4658d173d
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:31:25 2023 +0200
+
+   uudelleennimeä tiedosto.txt -> eka.txt
+
+tiedosto.txt => eka.txt | 0
+1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit aab9c7eab6c5676313ba747899b6d27efead3262
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:30:17 2023 +0200
+
+   poista toinen.txt
+
+toinen.txt | 1 -
+1 file changed, 1 deletion(-)
+
+commit aab163636921b59e571c9f72dc9b2755574d2929
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:26:38 2023 +0200
+
+   poista osa tekstistä ja lisää vähän lisää kohteessa tiedosto.txt
+
+tiedosto.txt | 6 +-----
+1 file changed, 1 insertion(+), 5 deletions(-)
+
+commit 8af961138d36ec1475a685952dc561d914bbcc62
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:23:29 2023 +0200
+
+   liitä paljon tekstiä kohteeseen tiedosto.txt
+
+tiedosto.txt | 11 +++++++++++
+1 file changed, 11 insertions(+)
+
+commit 4c54226db93459fefc20ae10aaa53e098c5b44cb
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:19:38 2023 +0200
+
+   luotu kansio stuff ja luotu juttu.txt kansioon stuff
+
+stuff/juttu.txt | 0
+1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 01b70cd5bf775754aba94b942403c509f9389be9
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:18:23 2023 +0200
+
+   muokattiin tiedostoja toinen.txt ja kolmas.txt
+
+kolmas.txt | 1 +
+toinen.txt | 1 +
+2 files changed, 2 insertions(+)
+
+commit 65991cca7bb28388520518cb5872b8f00579385f
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:17:12 2023 +0200
+
+   kolmas.txt luotu
+
+kolmas.txt | 0
+1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 784582cbcb2a3a911b4bc25a343fcb804d5c8344
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:15:08 2023 +0200
+
+   muutos ja lisäys
+
+tiedosto.txt | 1 +
+toinen.txt   | 0
+2 files changed, 1 insertion(+)
+
+commit 8a9c6f6fb50512811ae383ac42c4cc0b7f95eb17
+Author: tom <51736857+tomp2@users.noreply.github.com>
+Date:   Tue Mar 21 22:12:07 2023 +0200
+
+   tiedosto.txt luotu
+
+tiedosto.txt | 0
+1 file changed, 0 insertions(+), 0 deletions(-)
