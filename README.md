@@ -1,15 +1,11 @@
-## Ohjelmistotekniikka, kevät 2023
+# Ohjelmistotekniikka, harjoitustyö
 
-#### Kuvaus
+## Kuvaus
 Tämä repositorio sisältää ohjelmistotekniikan kurssiin liittyviä tehtäviä ja suorituksia.
 
----
+## Tehtävät
 
-**Viikko 1**
+### Viikko 1
 
-- `git`:in konfigurointi
-- `git`:in käyttö
-- GitHub repositorion luonti
-
----
-
+- komentorivin käyttö ([komentorivi.txt](/laskarit/viikko1/komentorivi.txt))
+- `git`:in käyttö ([gitlog.txt](/laskarit/viikko1/gitlog.txt))
