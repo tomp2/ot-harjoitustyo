@@ -13,7 +13,6 @@ T채m채 repositorio sis채lt채채 ohjelmistotekniikan kurssiin liittyvi채 teht채vi�
 
 ### Viikko 2
 
-> Coming soon!
+- Testikattavuusraportti ([unicafe-coverage.png](/laskarit/viikko2/unicafe-coverage.png))
+- Vaatimusm채채rittely ([vaatimusmaarittely.md](/dokumentaatio/vaatimusmaarittely.md))
 
-
----
