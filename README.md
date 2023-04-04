@@ -16,3 +16,10 @@ T채m채 repositorio sis채lt채채 ohjelmistotekniikan kurssiin liittyvi채 teht채vi�
 - Testikattavuusraportti ([unicafe-coverage.png](/laskarit/viikko2/unicafe-coverage.png))
 - Vaatimusm채채rittely ([vaatimusmaarittely.md](/dokumentaatio/vaatimusmaarittely.md))
 
+
+### Viikko 3
+
+- Luokkakaaviot ([monopoli.md](/laskarit/viikko3/monopoli.md) & [monopoli_laajennettu.md](/laskarit/viikko3/monopoli_laajennettu.md))
+- Sekvenssikaaviot ([sekvenssikaavio.md](/laskarit/viikko3/sekvenssikaavio.md) & [sekvenssikaavio_laajempi.jpg](/laskarit/viikko3/sekvenssikaavio_laajempi.jpg))
+
+
