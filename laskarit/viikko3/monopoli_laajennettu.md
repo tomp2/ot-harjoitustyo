@@ -1,5 +1,5 @@
+ ```mermaid
  classDiagram
-    direction TD
     Monopoli "1" o-- "2" Noppa
     Monopoli "1" o-- "2..8" Pelaaja
     Monopoli "1" o-- "1" Pelilauta
@@ -70,3 +70,4 @@
 
     
     Kortti : toiminto()*
+```
