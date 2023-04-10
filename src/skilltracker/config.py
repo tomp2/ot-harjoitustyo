@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 from skilltracker import utils
 
 PACKAGE_ROOT: Final[Path] = Path(__file__).parent
-SOURCES_ROOT: Final[Path] = PACKAGE_ROOT
-REPOSITORY_ROOT: Final[Path] = SOURCES_ROOT.parent
+SRC_ROOT: Final[Path] = PACKAGE_ROOT.parent
+REPOSITORY_ROOT: Final[Path] = SRC_ROOT.parent
 INCLUDED_DATA_DIR_PATH: Final[Path] = PACKAGE_ROOT / "data"
 
 APP_DEFAULT_DOTENV_PATH: Final[Path] = INCLUDED_DATA_DIR_PATH / ".env"
