@@ -3,17 +3,17 @@ from invoke import task
 
 @task
 def start(ctx):
-    ctx.run("python3 src/index.py", pty=True)
+    ctx.run("python3 src/skilltracker/index.py", pty=True)
 
 
 @task(aliases=("tests",))
 def test(ctx):
-    ctx.run("pytest src", pty=True)
+    ctx.run("pytest src/skilltracker/tests", pty=True)
 
 
 @task
 def coverage(ctx):
-    ctx.run("coverage run --branch -m pytest src", pty=True)
+    ctx.run("coverage run --branch -m pytest src/skilltracker", pty=True)
 
 
 @task(coverage)
