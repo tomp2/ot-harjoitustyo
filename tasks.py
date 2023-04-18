@@ -24,3 +24,8 @@ def coverage_report(ctx):
 @task(aliases=("format",))
 def black(ctx):
     ctx.run("black ./", pty=True)
+
+
+@task
+def mypy(ctx):
+    ctx.run("src/skilltracker", pty=True)
