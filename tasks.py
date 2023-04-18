@@ -28,4 +28,4 @@ def black(ctx):
 
 @task
 def mypy(ctx):
-    ctx.run("src/skilltracker", pty=True)
+    ctx.run("mypy src/skilltracker", pty=True)
