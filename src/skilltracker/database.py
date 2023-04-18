@@ -5,7 +5,7 @@ import sqlite3
 from contextlib import closing, contextmanager
 from pathlib import Path
 
-import config
+from skilltracker import config
 from skilltracker import models
 
 
@@ -15,9 +15,9 @@ def insecure_hash(text: str) -> str:
 
 class Database:
     def __init__(
-            self,
-            db_path: Path = config.DATABASE_FILEPATH,
-            schema_script: Path = config.DATABASE_CREATE_SCRIPT,
+        self,
+        db_path: Path = config.DATABASE_FILEPATH,
+        schema_script: Path = config.DATABASE_CREATE_SCRIPT,
     ):
         self._database: Path = db_path
         self._init_sqlite_script: Path = schema_script
@@ -45,7 +45,9 @@ class Database:
 
     def get_user(self, username: str) -> models.User | None:
         with self.get_cursor() as cursor:
-            cursor.execute("SELECT id,username,password FROM users WHERE username=?", (username,))
+            cursor.execute(
+                "SELECT id,username,password FROM users WHERE username=?", (username,)
+            )
             result = cursor.fetchone()
         return result and models.User(*result)
 
