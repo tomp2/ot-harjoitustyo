@@ -1,19 +1,14 @@
 from __future__ import annotations
 
 import sqlite3
-import sys
 import time
 from hmac import compare_digest
 from typing import Callable, Any
 
-if sys.version_info >= (3, 11):
-    from typing import Self
-else:
-    from typing_extensions import Self
-
 from dearpygui import dearpygui as dpg
 
 from skilltracker import models
+from skilltracker.custom_types import *
 from skilltracker.database import get_db, insecure_hash
 from skilltracker.ui.utils import show_modal, Colors
 from skilltracker.ui.view import View

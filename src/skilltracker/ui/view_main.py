@@ -3,11 +3,7 @@ import sys
 
 from typing import Callable
 
-if sys.version_info >= (3, 11):
-    from typing import Self
-else:
-    from typing_extensions import Self
-
+from skilltracker.custom_types import  *
 from dearpygui import dearpygui as dpg
 
 from skilltracker import models
