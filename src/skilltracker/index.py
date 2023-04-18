@@ -1,5 +1,9 @@
+from skilltracker.ui import UI
+
+
 def main():
-    print("Running app!")
+    ui = UI()
+    ui.start_main_loop()
 
 
 if __name__ == "__main__":
