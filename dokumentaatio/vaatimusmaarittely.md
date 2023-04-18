@@ -9,11 +9,11 @@ This software allows the user to track their performance in an online shooter ga
 
 ### Functionality
 - Application startup:
-	- A way for the user to either create an account or log in
+	- [x] A way for the user to either create an account or log in
 	- User can allow automatic login -> the user doesn't need to log in to their account on every application startup
-	- Multiple users can't have the same username
-	- Both username and password must be at least 3 characters long
-	- User is notified of invalid credentials
+	- [x] Multiple users can't have the same username
+	- [x] Both username and password must be at least 3 characters long
+	- [x] User is notified of invalid credentials
 - Logged in:
 	- User sees some basic statistics of their recent records if any exist
 		- Average score in the last hour/day/week/month
