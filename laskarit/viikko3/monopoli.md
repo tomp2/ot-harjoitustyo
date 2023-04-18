@@ -1,3 +1,4 @@
+ ```mermaid
  classDiagram
  
     Pelinappula "1" --> "1" Ruutu
@@ -38,3 +39,4 @@
         Pelilauta pelilauta
     }
     
+```

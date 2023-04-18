@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
     participant main
     participant Machine
@@ -22,3 +23,4 @@ sequenceDiagram
     Engine ->>+ FuelTank : consume(10)
     Engine ->>- Machine : 
     Machine ->>- main : 
+```
