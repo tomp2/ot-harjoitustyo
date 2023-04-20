@@ -1,16 +1,18 @@
 from __future__ import annotations
 
 import sqlite3
+import sys
 import time
+import traceback
 from hmac import compare_digest
 from typing import Callable, Any
 
 from dearpygui import dearpygui as dpg
 
 from skilltracker import models
-from skilltracker.custom_types import *
+from skilltracker.custom_types import Self
 from skilltracker.database import get_db, insecure_hash
-from skilltracker.ui.utils import show_modal, Colors
+from skilltracker.ui.utils import show_exception, Colors
 from skilltracker.ui.view import View
 
 
@@ -99,11 +101,15 @@ class LoginView(View):
 
         try:
             user_in_db = get_db().get_user(username)
-        except Exception as err:
-            show_modal(
-                title="Unexpected error!",
-                message=f"Could not login.\n" f"Error message is shown below:\n\n{err}",
+        except Exception:
+            traceback_string = traceback.format_exc()
+            show_exception(
+                title="ERROR",
+                message="Unexpected error happened while trying to get user from database.\n"
+                        "This is a bug and shouldn't happen. Here's the whole error message:",
+                traceback=traceback_string
             )
+            print(traceback_string, file=sys.stderr)
             return
 
         if user_in_db is None:
@@ -111,7 +117,7 @@ class LoginView(View):
             return
 
         if not compare_digest(user_in_db.password, insecure_hash(password)):
-            self._add_message(f"Invalid password!")
+            self._add_message("Invalid password!")
             return
 
         dpg.configure_item("loading", show=True)
@@ -132,11 +138,15 @@ class LoginView(View):
         except sqlite3.IntegrityError:
             self._add_message("This username is already taken!")
             return
-        except Exception as err:
-            show_modal(
-                title="Unexpected error!",
-                message=f"Could not login.\n" f"Error message is shown below:\n\n{err}",
+        except Exception:
+            traceback_string = traceback.format_exc()
+            show_exception(
+                title="ERROR",
+                message="Unexpected error happened while trying save user to the database.\n"
+                        "This is a bug and shouldn't happen. Here's the whole error message:",
+                traceback=traceback_string
             )
+            print(traceback_string, file=sys.stderr)
             return
 
         dpg.configure_item("loading", show=True)
