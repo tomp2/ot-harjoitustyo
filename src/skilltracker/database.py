@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import sqlite3
+from collections.abc import Iterator
 from contextlib import closing, contextmanager
 from pathlib import Path
 
@@ -23,7 +24,7 @@ class Database:
         self._init_sqlite_script: Path = schema_script
 
     @contextmanager
-    def get_connection(self) -> sqlite3.Connection:
+    def get_connection(self) -> Iterator[sqlite3.Connection]:
         """Connection that closes automatically"""
         conn = sqlite3.connect(self._database)
         try:
@@ -33,7 +34,7 @@ class Database:
             conn.close()
 
     @contextmanager
-    def get_cursor(self) -> sqlite3.Cursor:
+    def get_cursor(self) -> Iterator[sqlite3.Cursor]:
         """Cursor that closes automatically"""
         with self.get_connection() as conn:
             with closing(conn.cursor()) as cursor:

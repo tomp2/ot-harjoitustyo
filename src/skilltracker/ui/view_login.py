@@ -106,8 +106,8 @@ class LoginView(View):
             show_exception(
                 title="ERROR",
                 message="Unexpected error happened while trying to get user from database.\n"
-                        "This is a bug and shouldn't happen. Here's the whole error message:",
-                traceback=traceback_string
+                "This is a bug and shouldn't happen. Here's the whole error message:",
+                traceback=traceback_string,
             )
             print(traceback_string, file=sys.stderr)
             return
@@ -143,8 +143,8 @@ class LoginView(View):
             show_exception(
                 title="ERROR",
                 message="Unexpected error happened while trying save user to the database.\n"
-                        "This is a bug and shouldn't happen. Here's the whole error message:",
-                traceback=traceback_string
+                "This is a bug and shouldn't happen. Here's the whole error message:",
+                traceback=traceback_string,
             )
             print(traceback_string, file=sys.stderr)
             return
