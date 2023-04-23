@@ -29,3 +29,8 @@ def black(ctx):
 @task
 def mypy(ctx):
     ctx.run("mypy src/skilltracker", pty=True)
+
+
+@task(aliases=("lint",))
+def pylint(ctx):
+    ctx.run("pylint src/skilltracker", pty=True)
