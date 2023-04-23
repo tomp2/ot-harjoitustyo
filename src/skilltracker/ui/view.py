@@ -1,34 +1,28 @@
 from __future__ import annotations
 
-import sys
-
-if sys.version_info >= (3, 11):
-    from typing import Self
-else:
-    from typing_extensions import Self
-
-from dearpygui import dearpygui as dpg
 from abc import abstractmethod
 
-from skilltracker.custom_types import *
+from dearpygui import dearpygui as dpg
+
+from skilltracker.custom_types import Self, DpgTag
 
 
 class View:
     def __init__(self, viewport_title: str | None = None):
-        self.viewport_title = f"skilltracker"
+        self.viewport_title = "skilltracker"
         if self.viewport_title is not None:
             self.viewport_title += f"- {viewport_title}"
 
-        self._window_tag: DPG_ID | None = None
+        self._window_tag: DpgTag | None = None
 
     @property
-    def window_tag(self) -> DPG_ID:
+    def window_tag(self) -> DpgTag:
         if self._window_tag is None:
             raise RuntimeError("window_id doesn't exists before view's window exists.")
         return self._window_tag
 
     @window_tag.setter
-    def window_tag(self, window_tag: DPG_ID) -> None:
+    def window_tag(self, window_tag: DpgTag) -> None:
         if self._window_tag is not None:
             raise RuntimeError("window_id is already set.")
         self._window_tag = window_tag
@@ -37,7 +31,6 @@ class View:
     def create(self) -> Self:
         """Implementation should create a dpg window and set the private
         _window_tag instance variable to the created dpg window's tag."""
-        pass
 
     def set_primary_window(self, value: bool) -> None:
         dpg.set_primary_window(self.window_tag, value)

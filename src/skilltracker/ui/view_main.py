@@ -1,12 +1,10 @@
 import math
-import sys
-
 from typing import Callable
 
-from skilltracker.custom_types import  *
 from dearpygui import dearpygui as dpg
 
 from skilltracker import models
+from skilltracker.custom_types import Self
 from skilltracker.ui.view import View
 
 
@@ -14,7 +12,7 @@ class MainView(View):
     """The main window of the app, shown after user has logged in."""
 
     def __init__(
-        self, user: models.User, quit_callback: Callable, log_out_callback: Callable
+            self, user: models.User, quit_callback: Callable, log_out_callback: Callable
     ):
         """
         Args:

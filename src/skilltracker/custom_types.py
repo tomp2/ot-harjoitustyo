@@ -6,6 +6,6 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import Self
 
-DPG_ID: TypeAlias = Union[int, str]
+DpgTag: TypeAlias = Union[int, str]
 
-__all__ = ["DPG_ID", "Self"]
+__all__ = ["DpgTag", "Self"]
