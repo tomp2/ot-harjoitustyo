@@ -1,25 +1,38 @@
-# Ohjelmistotekniikka, harjoitustyö
+# Skilltracker _(ohjelmistotekniikan harjoitustyö)_
 
-## Kuvaus
-Tämä repositorio sisältää ohjelmistotekniikan kurssiin liittyviä tehtäviä ja suorituksia.
+This software allows the user to track their performance in an online shooter game _recoil control_. In many online shooter games, the user can try to counteract the recoil by moving their mouse in a specific way.
 
-## Tehtävät
+## Documentation
 
-### Viikko 1
+[Software specification/requirements](/dokumentaatio/vaatimusmaarittely.md)
+[Timesheet](/dokumentaatio/tuntikirjanpito.md)
+[Changelog](/dokumentaatio/changelog.md)
 
-- komentorivin käyttö ([komentorivi.txt](/laskarit/viikko1/komentorivi.txt))
-- `git`:in käyttö ([gitlog.txt](/laskarit/viikko1/gitlog.txt))
-
-
-### Viikko 2
-
-- Testikattavuusraportti ([unicafe-coverage.png](/laskarit/viikko2/unicafe-coverage.png))
-- Vaatimusmäärittely ([vaatimusmaarittely.md](/dokumentaatio/vaatimusmaarittely.md))
-
-
-### Viikko 3
-
-- Luokkakaaviot ([monopoli.md](/laskarit/viikko3/monopoli.md) & [monopoli_laajennettu.md](/laskarit/viikko3/monopoli_laajennettu.md))
-- Sekvenssikaaviot ([sekvenssikaavio.md](/laskarit/viikko3/sekvenssikaavio.md) & [sekvenssikaavio_laajempi.jpg](/laskarit/viikko3/sekvenssikaavio_laajempi.jpg))
-
-
+## Installation
+### Method 1: For the end user
+1. Install with `pip` straight from github
+```bash
+pip install --user git+https://github.com/tomp2/ot-harjoitustyo.git
+```
+2. Start the application 
+```bash
+python -m skilltracker
+```
+### Method 2: For development and testing
+> Note: This method requires [poetry](https://python-poetry.org/)!
+1. Clone the repository
+```bash
+git clone https://github.com/tomp2/ot-harjoitustyo
+```
+2. Navigate into the directory
+```bash
+cd ot-harjoitustyo
+```
+3. Install dependencies
+```bash
+poetry install
+```
+4. Start the application
+```bash
+poetry run invoke start
+```
