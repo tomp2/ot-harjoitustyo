@@ -7,7 +7,7 @@ from typing import Callable, Any
 from dearpygui import dearpygui as dpg
 
 from skilltracker import models
-from skilltracker.custom_types import Self
+from skilltracker.custom_types import Self, DpgTag
 from skilltracker.exceptions import InvalidPasswordError, UserNotFoundError, UserInputValidationError
 from skilltracker.repositories.user_repository import get_default_user_repository
 from skilltracker.ui.utils import Colors
@@ -25,9 +25,9 @@ class LoginView(View):
         super().__init__(viewport_title="Login")
         self._login_callback = login_callback
 
-        self._messages_group_tag = dpg.generate_uuid()
-        self._username_input_tag = dpg.generate_uuid()
-        self._password_input_tag = dpg.generate_uuid()
+        self._messages_group_tag: DpgTag | None = None
+        self._username_input_tag: DpgTag | None = None
+        self._password_input_tag: DpgTag | None = None
 
     def create(self) -> Self:
         with dpg.window() as window:
@@ -35,16 +35,14 @@ class LoginView(View):
 
             dpg.add_text("Log in to your account", color=[70, 230, 255])
             dpg.add_separator()
-            dpg.add_input_text(
-                tag=self._username_input_tag,
+            self._username_input_tag = dpg.add_input_text(
                 label="Username",
                 width=200,
                 hint="Type your username here",
                 callback=self._attempt_login,
                 on_enter=True,
             )
-            dpg.add_input_text(
-                tag=self._password_input_tag,
+            self._password_input_tag = dpg.add_input_text(
                 label="Password",
                 width=200,
                 hint="Type your password here",
@@ -52,7 +50,7 @@ class LoginView(View):
                 callback=self._attempt_login,
                 on_enter=True,
             )
-            dpg.add_group(tag=self._messages_group_tag)
+            self._messages_group_tag = dpg.add_group()
 
             with dpg.group(horizontal=True):
                 dpg.add_button(label="Sign Up", width=100, callback=self._attempt_signup)
