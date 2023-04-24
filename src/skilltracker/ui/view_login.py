@@ -1,23 +1,17 @@
 from __future__ import annotations
 
 import sqlite3
-import sys
 import time
-import traceback
-from hmac import compare_digest
 from typing import Callable, Any
 
 from dearpygui import dearpygui as dpg
 
 from skilltracker import models
 from skilltracker.custom_types import Self
-from skilltracker.database import get_db, insecure_hash
-from skilltracker.ui.utils import show_exception, Colors
+from skilltracker.exceptions import InvalidPasswordError, UserNotFoundError, UserInputValidationError
+from skilltracker.repositories.user_repository import get_default_user_repository
+from skilltracker.ui.utils import Colors
 from skilltracker.ui.view import View
-
-
-class ValidationError(Exception):
-    pass
 
 
 class LoginView(View):
@@ -81,42 +75,30 @@ class LoginView(View):
     def _get_login_fields(self) -> tuple[str, str]:
         username = dpg.get_value(self._username_input_tag)
         password = dpg.get_value(self._password_input_tag)
-        print(f"{username=}")
-        self._clear_messages()
-        time.sleep(0.08)
-        if len(username) < 3:
-            self._add_message("Username must be at least 3 characters long!")
-            raise ValidationError
-        if len(password) < 3:
-            self._add_message("Password must be at least 3 characters long!")
-            raise ValidationError
-
         return username, password
 
+    def _validate_login_fields(self, username: str, password: str) -> None:
+        self._clear_messages()
+        if len(username) < 3:
+            self._add_message("Username must be at least 3 characters long!")
+            raise UserInputValidationError
+        if len(password) < 3:
+            self._add_message("Password must be at least 3 characters long!")
+            raise UserInputValidationError
+
     def _attempt_login(self):
+        username, password = self._get_login_fields()
         try:
-            username, password = self._get_login_fields()
-        except ValidationError:
+            self._validate_login_fields(username, password)
+        except UserInputValidationError:
             return
 
         try:
-            user_in_db = get_db().get_user(username)
-        except Exception:
-            traceback_string = traceback.format_exc()
-            show_exception(
-                title="ERROR",
-                message="Unexpected error happened while trying to get user from database.\n"
-                "This is a bug and shouldn't happen. Here's the whole error message:",
-                traceback=traceback_string,
-            )
-            print(traceback_string, file=sys.stderr)
-            return
-
-        if user_in_db is None:
+            user_in_db = get_default_user_repository().get_by_login(username, password)
+        except UserNotFoundError:
             self._add_message("Unknown username!")
             return
-
-        if not compare_digest(user_in_db.password, insecure_hash(password)):
+        except InvalidPasswordError:
             self._add_message("Invalid password!")
             return
 
@@ -124,29 +106,20 @@ class LoginView(View):
         self._add_message(
             "Username and Password correct! Logging in...", Colors.BRIGHT_GREEN
         )
-        time.sleep(0.75)
+        time.sleep(0.4)
         self._login_callback(user_in_db)
 
     def _attempt_signup(self) -> None:
+        username, password = self._get_login_fields()
         try:
-            username, password = self._get_login_fields()
-        except ValidationError:
+            self._validate_login_fields(username, password)
+        except UserInputValidationError:
             return
 
         try:
-            user_in_db = get_db().add_user(username, password)
+            user_in_db = get_default_user_repository().add_user(username, password)
         except sqlite3.IntegrityError:
             self._add_message("This username is already taken!")
-            return
-        except Exception:
-            traceback_string = traceback.format_exc()
-            show_exception(
-                title="ERROR",
-                message="Unexpected error happened while trying save user to the database.\n"
-                "This is a bug and shouldn't happen. Here's the whole error message:",
-                traceback=traceback_string,
-            )
-            print(traceback_string, file=sys.stderr)
             return
 
         dpg.configure_item("loading", show=True)
