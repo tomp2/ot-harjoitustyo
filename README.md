@@ -8,7 +8,11 @@ This software allows the user to track their performance in an online shooter ga
 - [Timesheet](/dokumentaatio/tuntikirjanpito.md)
 - [Changelog](/dokumentaatio/changelog.md)
 
+## Downloads
+**Latest release available [here!](https://github.com/tomp2/ot-harjoitustyo/releases/tag/viikko5)**
+
 ## Installation
+
 ### Method 1: For the end user
 1. Install with `pip` straight from github
 ```bash
