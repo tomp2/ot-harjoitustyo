@@ -8,6 +8,8 @@ from skilltracker.custom_types import Self
 
 
 class Database:
+    """Class that implements context managers for getting database cursor/connection."""
+
     def __init__(
         self,
         database_path: Path = DEFAULT_CONFIG["paths"]["database_file"],
@@ -28,19 +30,20 @@ class Database:
 
     @contextmanager
     def get_cursor(self) -> Iterator[sqlite3.Cursor]:
-        """Cursor that closes automatically"""
+        """Context manager for automatically closing cursor."""
         with self.get_connection() as conn:
             with closing(conn.cursor()) as cursor:
                 yield cursor
 
     def initialize(self) -> Self:
-        """Create database file"""
+        """Create database file."""
         with self.get_cursor() as cursor:
             cursor.execute(self._init_sqlite_script.read_text("utf8"))
         return self
 
 
 def get_default_database() -> Database:
+    """Create and/or return instance of a Database with default app configurations."""
     if not hasattr(get_default_database, "_database_instance"):
         database = Database().initialize()
         setattr(get_default_database, "_database_instance", database)

@@ -53,15 +53,13 @@ class MainView(View):
 
             with dpg.child_window(height=75, horizontal_scrollbar=True):
                 with dpg.group(horizontal=True):
-                    dpg.add_button(label="Videogame 1", height=55, enabled=False)
-                    dpg.add_button(label="Videogame 2", height=55, enabled=False)
-                    dpg.add_button(label="Videogame 3", height=55, enabled=False)
-
+                    dpg.add_button(label="Create a record", height=55, enabled=False)
+                    dpg.add_button(label="View records", height=55, enabled=False)
             with dpg.child_window(height=450):
                 with dpg.group(horizontal=True, width=0):
                     with dpg.child_window(width=102, height=150):
                         dpg.add_button(label="Day", enabled=False)
-                        dpg.add_button(label="Weed", enabled=False)
+                        dpg.add_button(label="Week", enabled=False)
                         dpg.add_button(label="Month", enabled=False)
 
                     with dpg.child_window(height=350, width=500):

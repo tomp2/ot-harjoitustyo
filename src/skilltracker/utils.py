@@ -9,6 +9,7 @@ from typing import Generator, Any, Iterator
 
 @contextmanager
 def as_working_dir(working_dir: PathLike[str]) -> Generator[PathLike[str], Any, None]:
+    """Set and revert working directory as a context manager."""
     previous_working_dir = os.getcwd()
     os.chdir(working_dir)
     try:

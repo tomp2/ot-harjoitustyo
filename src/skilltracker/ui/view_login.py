@@ -38,14 +38,14 @@ class LoginView(View):
             self._username_input_tag = dpg.add_input_text(
                 label="Username",
                 width=200,
-                hint="Type your username here",
+                hint="<username>",
                 callback=self._attempt_login,
                 on_enter=True,
             )
             self._password_input_tag = dpg.add_input_text(
                 label="Password",
                 width=200,
-                hint="Type your password here",
+                hint="<password>",
                 password=True,
                 callback=self._attempt_login,
                 on_enter=True,

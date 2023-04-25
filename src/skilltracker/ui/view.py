@@ -18,7 +18,7 @@ class View:
     @property
     def window_tag(self) -> DpgTag:
         if self._window_tag is None:
-            raise RuntimeError("window_id doesn't exists before view's window exists.")
+            raise RuntimeError("window_id doesn't exists before view has been created.")
         return self._window_tag
 
     @window_tag.setter
