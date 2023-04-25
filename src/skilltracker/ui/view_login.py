@@ -8,7 +8,11 @@ from dearpygui import dearpygui as dpg
 
 from skilltracker import models
 from skilltracker.custom_types import Self, DpgTag
-from skilltracker.exceptions import InvalidPasswordError, UserNotFoundError, UserInputValidationError
+from skilltracker.exceptions import (
+    InvalidPasswordError,
+    UserNotFoundError,
+    UserInputValidationError,
+)
 from skilltracker.repositories.user_repository import get_default_user_repository
 from skilltracker.ui.utils import Colors
 from skilltracker.ui.view import View
@@ -122,7 +126,7 @@ class LoginView(View):
 
         dpg.configure_item("loading", show=True)
         self._add_message("Username & password OK, creating account...", Colors.GREEN)
-        time.sleep(1)
+        time.sleep(0.3)
         self._add_message("Account created! Logging in...", Colors.GREEN)
-        time.sleep(1)
+        time.sleep(0.3)
         self._login_callback(user_in_db)

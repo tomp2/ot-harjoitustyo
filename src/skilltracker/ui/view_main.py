@@ -14,7 +14,7 @@ class MainView(View):
     """The main window of the app, shown after user has logged in."""
 
     def __init__(
-            self, user: models.User, quit_callback: Callable, log_out_callback: Callable
+        self, user: models.User, quit_callback: Callable, log_out_callback: Callable
     ):
         """
         Args:
@@ -31,13 +31,17 @@ class MainView(View):
             dpg.delete_item(popup)
             self._log_out_callback()
 
-        with centered_window(label="Delete account?", modal=True, horizontal_scrollbar=True) as popup:
+        with centered_window(
+            label="Delete account?", modal=True, horizontal_scrollbar=True
+        ) as popup:
             dpg.add_text("You won't be able to get your data back after this.")
             dpg.add_separator()
             dpg.add_text("Are you sure you want to delete everything?")
             with dpg.group(horizontal=True):
                 dpg.add_button(label="Yes", width=75, callback=_yes_callback)
-                dpg.add_button(label="Cancel", width=75, callback=lambda: dpg.delete_item(popup))
+                dpg.add_button(
+                    label="Cancel", width=75, callback=lambda: dpg.delete_item(popup)
+                )
 
     def create(self) -> Self:
         with dpg.window(label="Main Window", width=400, height=300) as window:
@@ -49,7 +53,9 @@ class MainView(View):
                     dpg.add_menu_item(label="Quit", callback=self._quit_callback)
                 with dpg.menu(label="User"):
                     dpg.add_menu_item(label="Log out", callback=self._log_out_callback)
-                    dpg.add_menu_item(label="Delete account", callback=self._delete_account_callback)
+                    dpg.add_menu_item(
+                        label="Delete account", callback=self._delete_account_callback
+                    )
 
             with dpg.child_window(height=75, horizontal_scrollbar=True):
                 with dpg.group(horizontal=True):
