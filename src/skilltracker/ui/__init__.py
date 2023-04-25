@@ -1,1 +1,1 @@
-from skilltracker.ui.ui import UI
+from skilltracker.ui.ui import GuiManager

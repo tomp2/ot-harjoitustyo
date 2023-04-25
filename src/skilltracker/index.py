@@ -2,7 +2,7 @@ from skilltracker import ui
 
 
 def main():
-    ui.UI().start_main_loop()
+    ui.GuiManager().start_main_loop()
 
 
 if __name__ == "__main__":
