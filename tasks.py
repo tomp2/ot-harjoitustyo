@@ -1,5 +1,6 @@
-from invoke import task
 import platform
+
+from invoke import task
 
 USE_PTY: bool = platform.system() == "Linux"
 

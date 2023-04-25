@@ -5,3 +5,5 @@ __pycache__
 htmlcov
 app_data
 dist
+scraps.py
+src/skilltracker/user_data

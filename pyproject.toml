@@ -15,6 +15,7 @@ invoke = "^2.0.0"
 dearpygui = "^1.9.0"
 python-dotenv = "^1.0.0"
 typing-extensions = "^4.5.0"
+tomli = "^2.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -23,6 +24,10 @@ coverage = "^7.2.2"
 black = "^23.3.0"
 mypy = "^1.2.0"
 pylint = "^2.17.2"
+
+
+[tool.poetry.group.black.dependencies]
+black = {extras = ["d"], version = "^23.3.0"}
 
 [build-system]
 requires = ["poetry-core"]
@@ -38,9 +43,9 @@ no_implicit_optional = true
 warn_return_any = true
 show_error_codes = true
 warn_unused_ignores = true
-#[[tool.mypy.overrides]]
-#module = ["dearpygui"]
-#ignore_missing_imports = true
+[[tool.mypy.overrides]]
+module = "dearpygui.*"
+ignore_missing_imports = true
 
 [tool.black]
 line-length = 90
