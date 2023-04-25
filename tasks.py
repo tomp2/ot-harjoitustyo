@@ -12,7 +12,7 @@ def start(ctx):
 
 @task(aliases=("tests",))
 def test(ctx):
-    ctx.run("pytest src/skilltracker/tests", pty=USE_PTY)
+    ctx.run("pytest src/tests", pty=USE_PTY)
 
 
 @task
@@ -20,8 +20,12 @@ def coverage(ctx):
     ctx.run("coverage run --branch -m pytest src/skilltracker", pty=USE_PTY)
 
 
-@task(coverage)
 def coverage_report(ctx):
+    ctx.run("coverage report -m", pty=USE_PTY)
+
+
+@task(coverage)
+def coverage_html(ctx):
     ctx.run("coverage html", pty=USE_PTY)
 
 
