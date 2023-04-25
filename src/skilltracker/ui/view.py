@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
 from dearpygui import dearpygui as dpg
 
 from skilltracker.custom_types import Self, DpgTag
 
 
-class View:
+class View(ABC):
     def __init__(self, viewport_title: str | None = None):
         self.viewport_title = "skilltracker"
         if self.viewport_title is not None:
