@@ -4,9 +4,9 @@ This software allows the user to track their performance in an online shooter ga
 
 ## Documentation
 
-[Software specification/requirements](/dokumentaatio/vaatimusmaarittely.md)
-[Timesheet](/dokumentaatio/tuntikirjanpito.md)
-[Changelog](/dokumentaatio/changelog.md)
+- [Software specification/requirements](/dokumentaatio/vaatimusmaarittely.md)
+- [Timesheet](/dokumentaatio/tuntikirjanpito.md)
+- [Changelog](/dokumentaatio/changelog.md)
 
 ## Installation
 ### Method 1: For the end user
