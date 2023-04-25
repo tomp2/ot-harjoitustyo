@@ -3,23 +3,23 @@ from collections.abc import Iterator
 from contextlib import closing, contextmanager
 from pathlib import Path
 
-from skilltracker import config
+from skilltracker.config import DEFAULT_CONFIG
 from skilltracker.custom_types import Self
 
 
 class Database:
     def __init__(
-            self,
-            db_path: Path = config.DATABASE_FILEPATH,
-            schema_script: Path = config.DATABASE_CREATE_SCRIPT,
+        self,
+        database_path: Path = DEFAULT_CONFIG["paths"]["database_file"],
+        schema_script: Path = DEFAULT_CONFIG["paths"]["database_schema"],
     ):
-        self._database: Path = db_path
+        self._database_path: Path = database_path
         self._init_sqlite_script: Path = schema_script
 
     @contextmanager
     def get_connection(self) -> Iterator[sqlite3.Connection]:
-        """Connection that closes automatically"""
-        conn = sqlite3.connect(self._database)
+        """Context manager for automatically closing connection."""
+        conn = sqlite3.connect(self._database_path)
         try:
             yield conn
             conn.commit()
