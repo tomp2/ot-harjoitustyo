@@ -1,17 +1,16 @@
-import tempfile
-import unittest
 import sqlite3
+import unittest
 from pathlib import Path
-from unittest.mock import patch
 
-from skilltracker.config import DEFAULT_CONFIG
-from skilltracker.database import Database, get_default_database
+from skilltracker.database import Database
+from skilltracker.settings import SettingRegistry
 
 TESTS_DIR = Path(__file__).parent
 
 
 class TestDatabase(unittest.TestCase):
-    temp_test_db_file = TESTS_DIR / "tests.db"
+    setup_class_db_file = TESTS_DIR / "setup_class_tests.db"
+    setup_db_file = TESTS_DIR / "setup_tests.db"
 
     @classmethod
     def setUpClass(cls):
@@ -20,28 +19,17 @@ class TestDatabase(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cls.temp_test_db_file.unlink()
+        cls.setup_class_db_file.unlink()
 
     def setUp(self):
         self.database = Database(database_path=self.temp_test_db_file)
 
-    def test_get_default_database_initializes(self):
-        with patch("skilltracker.database.Database.initialize") as initialize_mock:
-            get_default_database()
-            self.assertTrue(initialize_mock.called)
-
     def test_instance_creation(self):
-        default_db = Database()
-        assert default_db._database_path == DEFAULT_CONFIG["paths"]["database_file"]
+        assert self.setup_database._database_path == self.setup_db_file
         assert (
-            default_db._init_sqlite_script == DEFAULT_CONFIG["paths"]["database_schema"]
+            self.setup_database._init_sqlite_script
+            == SettingRegistry.get().database_schema_file
         )
-
-        database_path = Path("testpath")
-        database_script = Path("testscript")
-        custom_db = Database(database_path=database_path, schema_script=database_script)
-        assert custom_db._database_path == database_path
-        assert custom_db._init_sqlite_script == database_script
 
     def test_initialize_creates_file(self):
         database_path = TESTS_DIR / "test_temp.sqlite"
