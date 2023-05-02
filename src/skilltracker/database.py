@@ -3,7 +3,7 @@ from collections.abc import Iterator
 from contextlib import closing, contextmanager
 from pathlib import Path
 
-from skilltracker.config import DEFAULT_CONFIG
+from skilltracker.settings import SettingRegistry
 from skilltracker.custom_types import Self
 
 
@@ -12,10 +12,10 @@ class Database:
 
     def __init__(
         self,
-        database_path: Path = DEFAULT_CONFIG["paths"]["database_file"],
-        schema_script: Path = DEFAULT_CONFIG["paths"]["database_schema"],
+        database_file: Path = SettingRegistry.get().database_file,
+        schema_script: Path = SettingRegistry.get().database_schema_file,
     ):
-        self._database_path: Path = database_path
+        self._database_path: Path = database_file
         self._init_sqlite_script: Path = schema_script
 
     @contextmanager

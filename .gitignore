@@ -3,7 +3,5 @@ __pycache__
 .idea
 .coverage
 htmlcov
-app_data
 dist
-scraps.py
-src/skilltracker/user_data
+src/skilltracker/user_data/*
