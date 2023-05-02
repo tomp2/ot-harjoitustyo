@@ -22,6 +22,7 @@ shooter games, the user can try to counteract the recoil by moving their mouse i
         <li><a href="/dokumentaatio/vaatimusmaarittely.md">Software specification/requirements</a></li>
         <li><a href="/dokumentaatio/tuntikirjanpito.md">Timesheet</a></li>
         <li><a href="/dokumentaatio/changelog.md">Changelog</a></li>
+        <li><a href="/dokumentaatio/arkkitehtuuri.md">Architecture</a></li>
       </ul>
     </li>
   </ol>
@@ -100,3 +101,4 @@ git clone https://github.com/tomp2/ot-harjoitustyo &&
 - [Software specification/requirements](/dokumentaatio/vaatimusmaarittely.md)
 - [Timesheet](/dokumentaatio/tuntikirjanpito.md)
 - [Changelog](/dokumentaatio/changelog.md)
+- [Architecture](dokumentaatio/arkkitehtuuri.md)
