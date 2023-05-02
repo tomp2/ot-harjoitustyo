@@ -13,7 +13,7 @@ from skilltracker.exceptions import (
     UserNotFoundError,
     UserInputValidationError,
 )
-from skilltracker.repositories.user_repository import get_default_user_repository
+from skilltracker.repositories.user_repository import UserRepositoryRegistry
 from skilltracker.ui.utils import Colors
 from skilltracker.ui.view import View
 
@@ -21,12 +21,17 @@ from skilltracker.ui.view import View
 class LoginView(View):
     """Initial login window shown on app startup. Allows login and account creation."""
 
-    def __init__(self, login_callback: Callable[[models.User], Any]):
+    def __init__(
+        self,
+        login_callback: Callable[[models.User], Any],
+        user_repository=UserRepositoryRegistry.get(),
+    ):
         """
         Args:
             login_callback: callable to check login credentials
         """
         super().__init__(viewport_title="Login")
+        self._user_repository = user_repository
         self._login_callback = login_callback
 
         self._messages_group_tag: DpgTag | None = None
@@ -96,7 +101,9 @@ class LoginView(View):
             return
 
         try:
-            user_in_db = get_default_user_repository().get_by_login(username, password)
+            user_in_db = self._user_repository.get_by_username_and_password(
+                username, password
+            )
         except UserNotFoundError:
             self._add_message("Unknown username!")
             return
@@ -119,7 +126,7 @@ class LoginView(View):
             return
 
         try:
-            user_in_db = get_default_user_repository().add_user(username, password)
+            user_in_db = self._user_repository.add_user(username, password)
         except sqlite3.IntegrityError:
             self._add_message("This username is already taken!")
             return

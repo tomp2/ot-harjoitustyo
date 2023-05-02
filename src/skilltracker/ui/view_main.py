@@ -7,14 +7,17 @@ from skilltracker import models
 from skilltracker.custom_types import Self
 from skilltracker.ui.utils import centered_window
 from skilltracker.ui.view import View
-from skilltracker.repositories.user_repository import get_default_user_repository
+from skilltracker.repositories.user_repository import UserRepositoryRegistry
 
 
 class MainView(View):
     """The main window of the app, shown after user has logged in."""
 
     def __init__(
-        self, user: models.User, quit_callback: Callable, log_out_callback: Callable
+        self,
+        user: models.User,
+        quit_callback: Callable,
+        log_out_callback: Callable,
     ):
         """
         Args:
@@ -27,7 +30,7 @@ class MainView(View):
 
     def _delete_account_callback(self):
         def _yes_callback():
-            get_default_user_repository().delete_user(self._user.username)
+            UserRepositoryRegistry.get().delete_user(self._user.username)
             dpg.delete_item(popup)
             self._log_out_callback()
 
