@@ -13,15 +13,15 @@ class Database:
     def __init__(
         self,
         database_file: Path = SettingRegistry.get().database_file,
-        schema_script: Path = SettingRegistry.get().database_schema_file,
+        sql_script: Path = SettingRegistry.get().database_schema_file,
     ):
-        self._database_path: Path = database_file
-        self._init_sqlite_script: Path = schema_script
+        self._database_file: Path = database_file
+        self._sql_script: Path = sql_script
 
     @contextmanager
     def get_connection(self) -> Iterator[sqlite3.Connection]:
         """Context manager for automatically closing connection."""
-        conn = sqlite3.connect(self._database_path)
+        conn = sqlite3.connect(self._database_file)
         try:
             yield conn
             conn.commit()
@@ -31,14 +31,17 @@ class Database:
     @contextmanager
     def get_cursor(self) -> Iterator[sqlite3.Cursor]:
         """Context manager for automatically closing cursor."""
+        conn: sqlite3.Connection
+        cursor: sqlite3.Cursor
         with self.get_connection() as conn:
             with closing(conn.cursor()) as cursor:
                 yield cursor
 
     def initialize(self) -> Self:
         """Create database file."""
-        with self.get_cursor() as cursor:
-            cursor.execute(self._init_sqlite_script.read_text("utf8"))
+        conn: sqlite3.Connection
+        with self.get_connection() as conn:
+            conn.executescript(self._sql_script.read_text("utf8"))
         return self
 
 
