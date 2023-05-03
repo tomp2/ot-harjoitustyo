@@ -62,9 +62,7 @@ def create_exception_modal(
             dpg.add_input_text(
                 label="Exception type", readonly=True, default_value=exc_type.__name__
             )
-            dpg.add_input_text(
-                label="Message", readonly=True, default_value=str(exc_value)
-            )
+            dpg.add_input_text(label="Message", readonly=True, default_value=str(exc_value))
             dpg.add_input_text(
                 label="Function/module",
                 readonly=True,
@@ -80,9 +78,7 @@ def create_exception_modal(
             dpg.add_text("Locals")
             dpg.add_input_text(
                 readonly=True,
-                default_value=pprint.pformat(
-                    traceback_.tb_frame.f_locals, depth=10, indent=2
-                ),
+                default_value=pprint.pformat(traceback_.tb_frame.f_locals, depth=10, indent=2),
                 multiline=True,
                 width=-1,
             )

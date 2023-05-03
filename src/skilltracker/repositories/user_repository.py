@@ -33,17 +33,13 @@ class UserRepository:
     def get_by_username(self, username: str) -> models.User | None:
         """Return user with given username, or None if not found."""
         with self._database.get_cursor() as cursor:
-            cursor.execute(
-                "SELECT id,username,password FROM users WHERE username=?", (username,)
-            )
+            cursor.execute("SELECT id,username,password FROM users WHERE username=?", (username,))
             result = cursor.fetchone()
         if result is None:
             return None
         return models.User(*result)
 
-    def get_by_username_and_password(
-        self, username: str, clear_password: str
-    ) -> models.User:
+    def get_by_username_and_password(self, username: str, clear_password: str) -> models.User:
         """Return user with given username and password.
 
         Args:

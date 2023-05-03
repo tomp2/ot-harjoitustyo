@@ -42,9 +42,7 @@ class MainView(View):
             dpg.add_text("Are you sure you want to delete everything?")
             with dpg.group(horizontal=True):
                 dpg.add_button(label="Yes", width=75, callback=_yes_callback)
-                dpg.add_button(
-                    label="Cancel", width=75, callback=lambda: dpg.delete_item(popup)
-                )
+                dpg.add_button(label="Cancel", width=75, callback=lambda: dpg.delete_item(popup))
 
     def create(self) -> Self:
         with dpg.window(label="Main Window", width=400, height=300) as window:

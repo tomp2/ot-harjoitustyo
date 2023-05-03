@@ -101,9 +101,7 @@ class LoginView(View):
             return
 
         try:
-            user_in_db = self._user_repository.get_by_username_and_password(
-                username, password
-            )
+            user_in_db = self._user_repository.get_by_username_and_password(username, password)
         except UserNotFoundError:
             self._add_message("Unknown username!")
             return
@@ -112,9 +110,7 @@ class LoginView(View):
             return
 
         dpg.configure_item("loading", show=True)
-        self._add_message(
-            "Username and Password correct! Logging in...", Colors.BRIGHT_GREEN
-        )
+        self._add_message("Username and Password correct! Logging in...", Colors.BRIGHT_GREEN)
         time.sleep(0.4)
         self._login_callback(user_in_db)
 
