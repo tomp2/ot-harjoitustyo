@@ -404,30 +404,30 @@ toml = ["tomli"]
 
 [[package]]
 name = "dearpygui"
-version = "1.9.0"
+version = "1.9.1"
 description = "DearPyGui: A simple Python GUI Toolkit"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "dearpygui-1.9.0-cp310-cp310-macosx_10_6_x86_64.whl", hash = "sha256:0634cc8edbed199a1b76a6b8b92fe20c848649d14a13561c9043fb845f07cb13"},
-    {file = "dearpygui-1.9.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:85bbccf1e55e75d78783ce85a00937f95a974b1fb2a6522dd8217b9926ab7bf8"},
-    {file = "dearpygui-1.9.0-cp310-cp310-manylinux1_x86_64.whl", hash = "sha256:99ad6c07dc8243152d65bbfab4d1afa7e4157b76f70134e7c515990a5718bb2d"},
-    {file = "dearpygui-1.9.0-cp310-cp310-win_amd64.whl", hash = "sha256:5c1e89cda2c34a3bb75caa4b36c3318c307af9592ea341b231260d739cc838a7"},
-    {file = "dearpygui-1.9.0-cp311-cp311-macosx_10_6_x86_64.whl", hash = "sha256:eae0e458d49570f00da52e2e08511a37af81e4cc72736ae92ae335ba9cf779c4"},
-    {file = "dearpygui-1.9.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:253fbc867faceebee907ee66685079a69043fb14c4878e1df4916e9fc2e53fe3"},
-    {file = "dearpygui-1.9.0-cp311-cp311-manylinux1_x86_64.whl", hash = "sha256:a9e99b87f60d19a59c2eac8bf910fb6418ff0eed0242a88f47839c17e1f064fb"},
-    {file = "dearpygui-1.9.0-cp311-cp311-win_amd64.whl", hash = "sha256:2a32cc4b688950b9295cb2c867824d5514a5cf9a87a19981c2cd386881deaf34"},
-    {file = "dearpygui-1.9.0-cp37-cp37m-macosx_10_6_x86_64.whl", hash = "sha256:9586f8905f645744c034538f851abeb53a7311048d9daf9734228d95f8d75ce5"},
-    {file = "dearpygui-1.9.0-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:532a16aed78d7151b93d849d3587c28e1c6bc592c0831b25ea77f52637e54a41"},
-    {file = "dearpygui-1.9.0-cp37-cp37m-win_amd64.whl", hash = "sha256:70e717976d58ff961608c2e926a3eb05feb8716d2e7320084935b824bc87635e"},
-    {file = "dearpygui-1.9.0-cp38-cp38-macosx_10_6_x86_64.whl", hash = "sha256:6f51153f044fbbaa17645647c79725c3f3f5b11ea982e9cf00773ebed56d26c8"},
-    {file = "dearpygui-1.9.0-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:94b62a219e6b73f0ac8625f30c1635d3c24823e83c4449ee50862ab860c0ba04"},
-    {file = "dearpygui-1.9.0-cp38-cp38-win_amd64.whl", hash = "sha256:1daad9f62cba3835bbd2cd87a5d5c3bf062b21aee575f34666e21071ef74e934"},
-    {file = "dearpygui-1.9.0-cp39-cp39-macosx_10_6_x86_64.whl", hash = "sha256:3faa1a34f82a792afbe998b9bf7f21378c774b84a8945072ffdcaad9bf3867f8"},
-    {file = "dearpygui-1.9.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:dc36060b330970346bfcc2a019640e827c62877bab3a119078f78b416c52b3fb"},
-    {file = "dearpygui-1.9.0-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:3fea90197da90fa44af26a82a462556079ae1171a4a2e3406c6da8892f01ad34"},
-    {file = "dearpygui-1.9.0-cp39-cp39-win_amd64.whl", hash = "sha256:73111349e1eceac8cd647fca68921ef3804e8517818a657d6ed71013799efdee"},
+    {file = "dearpygui-1.9.1-cp310-cp310-macosx_10_6_x86_64.whl", hash = "sha256:055d3399bdf0cfa03a06ceed2a213c304f7eea314bc57032d9a06b1e8f6ec400"},
+    {file = "dearpygui-1.9.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:0c7ce1000004078f4d6ceb26b99df17118ae6d412aba60d0b4b217588d3cbfc7"},
+    {file = "dearpygui-1.9.1-cp310-cp310-manylinux1_x86_64.whl", hash = "sha256:5a006fe44590c362a03fe451237074ed99563d0334f1bc6ec6c7d498eca41e46"},
+    {file = "dearpygui-1.9.1-cp310-cp310-win_amd64.whl", hash = "sha256:2982e456dbe2be5bf7e398af6e1f9ea16d8bfdc90e00d83b9c17c834d210cb7a"},
+    {file = "dearpygui-1.9.1-cp311-cp311-macosx_10_6_x86_64.whl", hash = "sha256:8a031bcd0e58083dd0f48ada33ec86a2379f47fc56d8e199aef481237ceda774"},
+    {file = "dearpygui-1.9.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:c16181743f79b2d2809d24e696a5e5144135ad61ee10072ce1430bc5724ee5c1"},
+    {file = "dearpygui-1.9.1-cp311-cp311-manylinux1_x86_64.whl", hash = "sha256:64cba064a5b6dac96abd8fb88fdb61842ca75668bdca364fbd52b9151adc6eb9"},
+    {file = "dearpygui-1.9.1-cp311-cp311-win_amd64.whl", hash = "sha256:b687bfa9e5dd34cb84e144ad307ec4d0fa8ad7c43f37a0cbd68d018a93f0d240"},
+    {file = "dearpygui-1.9.1-cp37-cp37m-macosx_10_6_x86_64.whl", hash = "sha256:fa37c0f95a202fefba86e0f9e422357e24297f65554c06d8cf68b71b3671f278"},
+    {file = "dearpygui-1.9.1-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:10310d34ef998cc201b13915a8742d6a69bf32a17c999bea2abfdf12a14bce31"},
+    {file = "dearpygui-1.9.1-cp37-cp37m-win_amd64.whl", hash = "sha256:1a05cc0adeb9cba19181eafe2418c1b6e2004624b350a619c0e7b3c92ff0966c"},
+    {file = "dearpygui-1.9.1-cp38-cp38-macosx_10_6_x86_64.whl", hash = "sha256:d6d8fc7c6b8d97e972d4343b871ea789da39d89c9f7a5bb7bb106b4053fb1c69"},
+    {file = "dearpygui-1.9.1-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:1a308bc9bc21830a5c4d3f205559741a29bc191283dfa4ed5d24ae23a1e93dc2"},
+    {file = "dearpygui-1.9.1-cp38-cp38-win_amd64.whl", hash = "sha256:23b954f304bcf63e0c9aa5c16344f1d44e034ca5c6e0764e05bd1c0b0bd10173"},
+    {file = "dearpygui-1.9.1-cp39-cp39-macosx_10_6_x86_64.whl", hash = "sha256:069b557fd20cbbf0b13a0c41d16366eb7adb1c895fff1cd6653e472acee5ef5c"},
+    {file = "dearpygui-1.9.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:7646f0b80e0b94acd1e0232f32d5fe67b31d0e7b1921fb4947ee551d8b90ba86"},
+    {file = "dearpygui-1.9.1-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:7394cba85ef6495091e7806c9a9b7ae03463d77a84b507329dc2d5a42e6581c7"},
+    {file = "dearpygui-1.9.1-cp39-cp39-win_amd64.whl", hash = "sha256:caebf2e331a8d9f945806aaa2cd8a308cb2712c11b1484aee967ad031d79e0d1"},
 ]
 
 [[package]]
@@ -910,14 +910,14 @@ email = ["email-validator (>=1.0.3)"]
 
 [[package]]
 name = "pylint"
-version = "2.17.3"
+version = "2.17.4"
 description = "python code static checker"
 category = "dev"
 optional = false
 python-versions = ">=3.7.2"
 files = [
-    {file = "pylint-2.17.3-py3-none-any.whl", hash = "sha256:a6cbb4c6e96eab4a3c7de7c6383c512478f58f88d95764507d84c899d656a89a"},
-    {file = "pylint-2.17.3.tar.gz", hash = "sha256:761907349e699f8afdcd56c4fe02f3021ab5b3a0fc26d19a9bfdc66c7d0d5cd5"},
+    {file = "pylint-2.17.4-py3-none-any.whl", hash = "sha256:7a1145fb08c251bdb5cca11739722ce64a63db479283d10ce718b2460e54123c"},
+    {file = "pylint-2.17.4.tar.gz", hash = "sha256:5dcf1d9e19f41f38e4e85d10f511e5b9c35e1aa74251bf95cdd8cb23584e2db1"},
 ]
 
 [package.dependencies]
@@ -962,25 +962,10 @@ tomli = {version = ">=1.0.0", markers = "python_version < \"3.11\""}
 testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
-name = "python-dotenv"
-version = "1.0.0"
-description = "Read key-value pairs from a .env file and set them as environment variables"
-category = "main"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "python-dotenv-1.0.0.tar.gz", hash = "sha256:a8df96034aae6d2d50a4ebe8216326c61c3eb64836776504fcca410e5937a3ba"},
-    {file = "python_dotenv-1.0.0-py3-none-any.whl", hash = "sha256:f5971a9226b701070a4bf2c38c89e5a3f0d64de8debda981d1db98583009122a"},
-]
-
-[package.extras]
-cli = ["click (>=5.0)"]
-
-[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
@@ -1188,4 +1173,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "81bb97c20930590de070bff519a7996d9ca9f670e7a76013357d8a078c777709"
+content-hash = "f505969e615671846a8f344774916a46fa7b981905705560ff9a4da0e1110a1c"
