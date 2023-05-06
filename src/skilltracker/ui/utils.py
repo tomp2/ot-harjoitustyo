@@ -15,7 +15,7 @@ def centered_window(**kwargs):
     viewport_height = dpg.get_viewport_client_height()
 
     kwargs.setdefault("autosize", True)
-    kwargs.setdefault("min_size", (300, 100))
+    kwargs.setdefault("min_size", (450, 100))
     kwargs.setdefault("max_size", (int(viewport_width * 0.8), int(viewport_height * 0.7)))
 
     with dpg.mutex():
@@ -42,11 +42,27 @@ def create_exception_modal(
     traceback_text = traceback.format_exception(exc_type, exc_value, traceback_)
 
     with centered_window(
-        label="ERROR: Uncaught exception",
+        label="Unexpected Error!",
         modal=True,
     ) as popup:
-        dpg.add_text("This shouldn't have happened, this app isn't working correctly.")
-        dpg.add_text("It's probably a good idea to quit the app and report the problem.")
+        dpg.add_text(
+            "There was an error that shouldn't have happened, this app has an bug."
+            "You can continue to use the app, but it's not recommended since we "
+            "don't know whats wrong and if the problem will cause data-loss."
+            "It would be better to close the app and report the problem.",
+            wrap=0,
+        )
+        with dpg.group(horizontal=True):
+            dpg.add_button(
+                label="Dismiss",
+                width=75,
+                callback=lambda: dpg.delete_item(popup),
+            )
+            dpg.add_button(
+                label="Quit app",
+                width=95,
+                callback=dpg.stop_dearpygui,
+            )
         dpg.add_separator()
         with dpg.collapsing_header(label="See error details"):
             dpg.add_input_text(
@@ -82,11 +98,6 @@ def create_exception_modal(
                 multiline=True,
                 width=-1,
             )
-        dpg.add_button(
-            label="Dismiss",
-            width=75,
-            callback=lambda: dpg.delete_item(popup),
-        )
 
 
 class Colors:
