@@ -1,22 +1,23 @@
+from __future__ import annotations
+
 import sqlite3
 from collections.abc import Iterator
 from contextlib import closing, contextmanager
 from pathlib import Path
 
-from skilltracker.settings import SettingRegistry
 from skilltracker.custom_types import Self
+from skilltracker.object_registry import ObjectRegistry
+from skilltracker.settings import SETTINGS_REGISTRY
 
 
 class Database:
     """Class that implements context managers for getting database cursor/connection."""
 
-    def __init__(
-        self,
-        database_file: Path = SettingRegistry.get().database_file,
-        sql_script: Path = SettingRegistry.get().database_schema_file,
-    ):
-        self._database_file: Path = database_file
-        self._sql_script: Path = sql_script
+    def __init__(self, database_file: Path | None = None, sql_script: str | None = None):
+        self._database_file = database_file or SETTINGS_REGISTRY.get().database_file
+        self._sql_script = sql_script or SETTINGS_REGISTRY.get().database_schema_file.read_text(
+            "utf8"
+        )
 
     @contextmanager
     def get_connection(self) -> Iterator[sqlite3.Connection]:
@@ -41,14 +42,8 @@ class Database:
         """Create database file."""
         conn: sqlite3.Connection
         with self.get_connection() as conn:
-            conn.executescript(self._sql_script.read_text("utf8"))
+            conn.executescript(self._sql_script)
         return self
 
 
-def get_default_database() -> Database:
-    """Create and/or return instance of a Database with default app configurations."""
-    if not hasattr(get_default_database, "_database_instance"):
-        database = Database().initialize()
-        setattr(get_default_database, "_database_instance", database)
-
-    return getattr(get_default_database, "_database_instance")
+DATABASE_REGISTRY = ObjectRegistry(default_instance_factory=lambda: Database().initialize())

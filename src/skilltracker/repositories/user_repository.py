@@ -3,11 +3,11 @@ from __future__ import annotations
 
 import hashlib
 from hmac import compare_digest
-from typing import Final
 
 from skilltracker import models
-from skilltracker.database import Database, get_default_database
-from skilltracker.exceptions import UserNotFoundError, InvalidPasswordError
+from skilltracker.database import DATABASE_REGISTRY, Database
+from skilltracker.exceptions import UserNotFoundError, InvalidPasswordError, UsernameTakenError
+from skilltracker.object_registry import ObjectRegistry
 
 
 def insecure_hash(text: str) -> str:
@@ -26,9 +26,7 @@ class UserRepository:
             database: Optional Database instance to use for connections.
                 Default Database will be used if not given.
         """
-        if database is None:
-            database = get_default_database()
-        self._database = database
+        self._database = database or DATABASE_REGISTRY.get()
 
     def get_by_username(self, username: str) -> models.User | None:
         """Return user with given username, or None if not found."""
@@ -87,60 +85,4 @@ class UserRepository:
         return models.User(user_id, username, hashed_password)
 
 
-class UserRepositoryRegistry:
-    """Handles registering and providing UserRepository instances."""
-
-    DEFAULT_NAME: Final[str] = "default"
-    _registry: dict[str, UserRepository] = {}
-
-    @classmethod
-    def register(cls, name: str, user_repository: UserRepository) -> UserRepository:
-        """Register a UserRepository instance with the given name.
-
-        Args:
-            name: name for the instance. Used to access it later with `get`.
-            user_repository: UserRepository instance to register.
-
-        Returns:
-            UserRepository: the registered UserRepository instance.
-
-        Raises:
-            ValueError: If the name is already taken.
-
-        Notes:
-            The name "default" is reserved and cannot be used.
-        """
-        if name in cls._registry:
-            raise ValueError(f'UserRepository with name "{name}" is already registered.')
-        if name == cls.DEFAULT_NAME and cls.DEFAULT_NAME in cls._registry:
-            raise ValueError(
-                'Name "default" is reserved for registry\'s default UserRepository instance.'
-            )
-
-        cls._registry[name] = user_repository
-        return user_repository
-
-    @classmethod
-    def get(cls, name: str | None = None) -> UserRepository:
-        """Return UserRepository instance with the given name form the registry.
-
-        Args:
-            name: name for the instance. Defaults to "default".
-
-        Returns:
-            UserRepository: from the registry.
-
-        Notes:
-            If config_name isn't given, a new default UserRepository instance
-            will be created and registered with the name "default" and default
-            database. After, the default instance will be returned when
-            calling this again without config_name.
-        """
-        if name is not None:
-            return cls._registry[name]
-
-        default_instance = cls._registry.get(cls.DEFAULT_NAME)
-        if default_instance is None:
-            default_instance = UserRepository(get_default_database())
-            cls.register(cls.DEFAULT_NAME, default_instance)
-        return default_instance
+USER_REPO_REGISTRY = ObjectRegistry(default_instance_factory=UserRepository)
