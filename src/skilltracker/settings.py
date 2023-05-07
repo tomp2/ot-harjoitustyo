@@ -17,7 +17,8 @@ PACKAGE_ROOT: Final[Path] = Path(__file__).parent
 
 class Settings(BaseSettings):
     # App auto login
-    login: None | tuple[str, str] = None
+    username: None | str = None
+    password: None | str = None
 
     # App files and directories
     user_data_folder: DirectoryPath = PACKAGE_ROOT / "user_data/"

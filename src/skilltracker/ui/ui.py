@@ -75,7 +75,12 @@ class GuiManager:
         )
 
         self._set_gui_font()
-        self.show_login_view()
+
+        if self._settings.username and self._settings.password:
+            self._skilltracker_service.login(self._settings.username, self._settings.password)
+            self.show_game_view()
+        else:
+            self.show_login_view()
 
         dpg.setup_dearpygui()
         dpg.show_viewport()
