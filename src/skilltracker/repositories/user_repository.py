@@ -16,10 +16,15 @@ def insecure_hash(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+def check_password(clear_password, hashed_password) -> bool:
+    """Check password against a hash string."""
+    return compare_digest(insecure_hash(clear_password), hashed_password)
+
+
 class UserRepository:
     """A class that implements user account related read/write operations."""
 
-    def __init__(self, database: Database | None):
+    def __init__(self, database: Database | None = None):
         """Return a new UserRepository instance.
 
         Args:
@@ -28,14 +33,35 @@ class UserRepository:
         """
         self._database = database or DATABASE_REGISTRY.get()
 
-    def get_by_username(self, username: str) -> models.User | None:
-        """Return user with given username, or None if not found."""
+    def check_user_exists(self, username: str) -> bool:
+        """Return boolean indicating whether account with given username exists.
+
+        Args:
+            username: username for user.
+        """
+        with self._database.get_cursor() as cursor:
+            cursor.execute("SELECT username FROM users WHERE username=?", (username,))
+            user = cursor.fetchone()
+
+        return user is not None
+
+    def get_by_username(self, username: str) -> models.User:
+        """Return user with given username.
+
+        Args:
+            username: username for user,
+
+        Raises:
+            UserNotFoundError: If account with given username doesn't exist.
+        """
         with self._database.get_cursor() as cursor:
             cursor.execute("SELECT id,username,password FROM users WHERE username=?", (username,))
-            result = cursor.fetchone()
-        if result is None:
-            return None
-        return models.User(*result)
+            user = cursor.fetchone()
+
+        if user is None:
+            raise UserNotFoundError(f"User {username!r} doesn't exists.")
+
+        return models.User(*user)
 
     def get_by_username_and_password(self, username: str, clear_password: str) -> models.User:
         """Return user with given username and password.
@@ -45,22 +71,24 @@ class UserRepository:
             clear_password: un-hashed clear password
 
         Raises:
-            UserNotFoundError: If username does not exist in the database.
-            InvalidPasswordError: If hashed password does not match found
-                user's stored password hash.
+            UserNotFoundError: If account with given username doesn't exist.
+            InvalidPasswordError: If account exists but given password was wrong.
         """
         user = self.get_by_username(username)
-
-        if user is None:
-            raise UserNotFoundError
-
-        if not compare_digest(insecure_hash(clear_password), user.password_hash):
-            raise InvalidPasswordError
-
+        if not check_password(clear_password, user.password_hash):
+            raise InvalidPasswordError(f"Wrong password for user {username!r}")
         return user
 
     def delete_user(self, username: str) -> None:
-        """Deletes user with given username from the database."""
+        """Deletes user with given username from the database_file.
+
+        Args:
+            username: username
+
+        Raises:
+            UserNotFoundError: If account with given username doesn't exist.
+        """
+        self.get_by_username(username)
         with self._database.get_cursor() as cursor:
             cursor.execute("DELETE FROM users WHERE username=?", (username,))
 
@@ -71,9 +99,15 @@ class UserRepository:
             username: username
             clear_password: un-hashed clear password
 
+        Raises:
+            UsernameTakenError: if username is already in use.
+
         Returns:
-            User instance corresponding to the created user.
+            User instance of the created user.
         """
+        if self.check_user_exists(username):
+            raise UsernameTakenError(f"The username {username!r} is taken.")
+
         hashed_password = insecure_hash(clear_password)
         with self._database.get_cursor() as cursor:
             cursor.execute(

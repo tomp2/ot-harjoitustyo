@@ -48,10 +48,6 @@ class GuiManager:
             self.current_view.destroy()
         self.current_view = view
 
-    def login_user(self, user: models.User):
-        self.logged_in_user = user
-        self.show_main_view(user)
-
     def show_login_view(self):
         view = LoginView(login_callback=self.login_user).create()
         self.logged_in_user = None

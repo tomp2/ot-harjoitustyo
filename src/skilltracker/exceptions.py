@@ -1,10 +1,18 @@
-class UserNotFoundError(Exception):
+class LoginUserInputError(Exception):
     pass
 
 
-class InvalidPasswordError(Exception):
+class UserNotFoundError(LoginUserInputError):
     pass
 
 
-class UserInputValidationError(Exception):
+class InvalidPasswordError(LoginUserInputError):
+    pass
+
+
+class UserInputValidationError(LoginUserInputError):
+    pass
+
+
+class UsernameTakenError(LoginUserInputError):
     pass
