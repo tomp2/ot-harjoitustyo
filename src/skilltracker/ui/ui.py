@@ -41,7 +41,7 @@ class GuiManager:
 
     def show_view(self, view: View) -> None:
         """Set view as the primary window in the viewport."""
-        view.set_primary_window(True)
+        view.set_as_primary_window(True)
         view.apply_viewport_title()
 
         if self.current_view is not None:

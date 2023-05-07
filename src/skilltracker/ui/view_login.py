@@ -33,10 +33,8 @@ class LoginView(View):
         self._username_input_tag: DpgTag | None = None
         self._password_input_tag: DpgTag | None = None
 
-    def create(self) -> Self:
-        with dpg.window() as window:
-            self.window_tag = window
-
+    def build(self, window_tag) -> Self:
+        with dpg.window(tag=window_tag):
             dpg.add_text("Log in to your account", color=[70, 230, 255])
             dpg.add_separator()
             self._username_input_tag = dpg.add_input_text(

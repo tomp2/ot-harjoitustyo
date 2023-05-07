@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-from abc import abstractmethod, ABC
-
 from dearpygui import dearpygui as dpg
 
 from skilltracker.custom_types import Self, DpgTag
 
 
-class View(ABC):
+class View:
     def __init__(self, viewport_title: str | None = None):
         self.viewport_title = "skilltracker"
         if self.viewport_title is not None:
@@ -27,12 +25,15 @@ class View(ABC):
             raise RuntimeError("window_id is already set.")
         self._window_tag = window_tag
 
-    @abstractmethod
-    def create(self) -> Self:
-        """Implementation should create a dpg window and set the private
-        _window_tag instance variable to the created dpg window's tag."""
+    def initialize(self):
+        self.window_tag = dpg.generate_uuid()
+        return self.build(self.window_tag)
 
-    def set_primary_window(self, value: bool) -> None:
+    def build(self, window_tag: DpgTag) -> Self:
+        dpg.add_window(tag=window_tag)
+        return self
+
+    def set_as_primary_window(self, value: bool) -> None:
         dpg.set_primary_window(self.window_tag, value)
 
     def apply_viewport_title(self) -> None:
