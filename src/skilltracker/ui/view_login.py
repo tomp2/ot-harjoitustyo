@@ -13,7 +13,7 @@ from skilltracker.services.skilltracker_service import (
     SkilltrackerService,
     SKILLTRACKER_SERVICE_REGISTRY,
 )
-from skilltracker.ui.utils import Colors
+from skilltracker.ui.utils import Colors, center_item
 from skilltracker.ui.view import View
 
 
@@ -35,29 +35,32 @@ class LoginView(View):
 
     def build(self, window_tag) -> Self:
         with dpg.window(tag=window_tag):
-            dpg.add_text("Log in to your account", color=[70, 230, 255])
-            dpg.add_separator()
-            self._username_input_tag = dpg.add_input_text(
-                label="Username",
-                width=200,
-                hint="<username>",
-                callback=self._attempt_login,
-                on_enter=True,
-            )
-            self._password_input_tag = dpg.add_input_text(
-                label="Password",
-                width=200,
-                hint="<password>",
-                password=True,
-                callback=self._attempt_login,
-                on_enter=True,
-            )
-            self._messages_group_tag = dpg.add_group()
+            with dpg.group():
+                center_item(dpg.last_container(), window_tag, 50, 35)
+                with dpg.child_window(width=400, height=300):
+                    dpg.add_text("Log in to your account", color=[70, 230, 255])
+                    dpg.add_separator()
+                    self._username_input_tag = dpg.add_input_text(
+                        label="Username",
+                        width=200,
+                        hint="<username>",
+                        callback=self._attempt_login,
+                        on_enter=True,
+                    )
+                    self._password_input_tag = dpg.add_input_text(
+                        label="Password",
+                        width=200,
+                        hint="<password>",
+                        password=True,
+                        callback=self._attempt_login,
+                        on_enter=True,
+                    )
+                    self._messages_group_tag = dpg.add_group()
 
-            with dpg.group(horizontal=True):
-                dpg.add_button(label="Sign Up", width=100, callback=self._attempt_signup)
-                dpg.add_button(label="Login", width=100, callback=self._attempt_login)
-                dpg.add_loading_indicator(tag="loading", show=False)
+                    with dpg.group(horizontal=True):
+                        dpg.add_button(label="Sign Up", width=100, callback=self._attempt_signup)
+                        dpg.add_button(label="Login", width=100, callback=self._attempt_login)
+                        dpg.add_loading_indicator(tag="loading", show=False)
 
         return self
 
@@ -88,7 +91,6 @@ class LoginView(View):
 
         dpg.configure_item("loading", show=True)
         self._add_message("Username & Password correct! Logging in...", Colors.BRIGHT_GREEN)
-        time.sleep(0.4)
         self._login_callback()
 
     def _attempt_signup(self) -> None:
@@ -102,7 +104,5 @@ class LoginView(View):
 
         dpg.configure_item("loading", show=True)
         self._add_message("Username & password OK, creating account...", Colors.GREEN)
-        time.sleep(0.3)
         self._add_message("Account created! Logging in...", Colors.GREEN)
-        time.sleep(0.3)
         self._login_callback()

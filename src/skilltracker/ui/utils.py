@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 import pprint
 import traceback
 from contextlib import contextmanager
@@ -7,6 +8,44 @@ from types import TracebackType
 from typing import Type, Callable
 
 from dearpygui import dearpygui as dpg
+
+from skilltracker.custom_types import DpgTag
+
+
+def _center_item_callback(
+    sender, app_data, user_data: tuple[DpgTag, DpgTag, int | None, int | None]
+):
+    container, ui_item, x_percentage, y_percentage = user_data
+    if x_percentage is None and y_percentage is None:
+        return
+
+    item_width, item_height = dpg.get_item_rect_size(ui_item)
+    parent_width, parent_height = dpg.get_item_rect_size(container)
+
+    new_pos = dpg.get_item_pos(ui_item)
+    if x_percentage is not None:
+        new_pos[0] = max(0, int(parent_width * x_percentage / 100 - item_width // 2))
+    if y_percentage is not None:
+        new_pos[1] = max(0, int(parent_height * y_percentage / 100 - item_height // 2))
+
+    dpg.set_item_pos(ui_item, new_pos)
+
+
+def center_item(
+    ui_item: DpgTag,
+    container: DpgTag,
+    x_percentage: int | None = None,
+    y_percentage: int | None = None,
+) -> DpgTag:
+    containers_resize_registry_tag = f"{container}-item-resize-handler"
+    if not dpg.does_item_exist(containers_resize_registry_tag):
+        with dpg.item_handler_registry(tag=containers_resize_registry_tag):
+            dpg.add_item_resize_handler(
+                callback=_center_item_callback,
+                user_data=[container, ui_item, x_percentage, y_percentage],
+            )
+    dpg.bind_item_handler_registry(container, containers_resize_registry_tag)
+    return ui_item
 
 
 @contextmanager
